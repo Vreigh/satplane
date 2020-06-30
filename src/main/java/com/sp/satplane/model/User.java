@@ -1,4 +1,4 @@
-package com.sp.satplane.sat.model;
+package com.sp.satplane.model;
 
 import lombok.*;
 
@@ -7,11 +7,12 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SatUser {
+public class User {
 
-  private boolean isMan;
-  private boolean isAdult;
-  private boolean isOld;
+  private long id;
+
+  private Sex sex;
+  private int age;
   private boolean hasMotionSickness;
   private boolean isFlyingAbroad;
   private boolean isOftenFlying;

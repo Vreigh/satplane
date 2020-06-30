@@ -1,5 +1,7 @@
 package com.sp.satplane.sat.model;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,10 +12,14 @@ public class SatSeat {
 
   private Set<Integer> assigned = new HashSet<>();
 
-  public SatSeat(SatSeatVariable... vars) {
+  public SatSeat(Collection<SatSeatVariable> vars) {
     for (SatSeatVariable var : vars) {
       assigned.add(var.yes());
     }
+  }
+
+  public SatSeat(SatSeatVariable... vars) {
+    this(Arrays.asList(vars));
   }
 
   public boolean isAssigned(SatSeatVariable var) {
