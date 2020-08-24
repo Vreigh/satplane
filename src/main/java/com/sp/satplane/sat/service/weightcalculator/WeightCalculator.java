@@ -24,6 +24,7 @@ public class WeightCalculator {
     }
   }
 
+  // clause is created with alternatives, so for a match it is enough for just one variable to match
   private boolean checkSeatMatches(SatSeat seat, Clause clause) {
     for (int var : clause.getVarsVector()) {
       if (var > 0 && seat.isAssigned(var)) {

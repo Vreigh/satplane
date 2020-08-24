@@ -73,8 +73,6 @@
       <version>3.0</version>
     </dependency>
 
-    <!-- DATABASE - TODO -->
-
     <!-- SAT -->
     <dependency>
       <groupId>org.sat4j</groupId>

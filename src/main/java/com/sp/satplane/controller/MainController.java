@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sp.satplane.service.GetDiscomfortRationsService;
+import com.sp.satplane.model.Ticket;
+import com.sp.satplane.service.GetTicketsService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,11 +17,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MainController {
 
-  private final GetDiscomfortRationsService getDiscomfortRationsService;
+  private final GetTicketsService getTicketsService;
 
-  @GetMapping(path = "/user/{userId}/plane/{planeId}")
-  public List<Double> getDiscomfortRatios(@PathVariable("userId") Long userId, @PathVariable("planeId") Long planeId) {
-    return getDiscomfortRationsService.getDiscomfortRatios(userId, planeId);
+  @GetMapping(path = "/user/{userId}/plane/{planeId}/tickets")
+  public List<Ticket> getTickets(@PathVariable("userId") Long userId, @PathVariable("planeId") Long planeId) {
+    return getTicketsService.getTickets(userId, planeId);
   }
 
 }

@@ -10,8 +10,11 @@ import com.sp.satplane.sat.model.SatUser;
 
 import static com.sp.satplane.sat.model.SatSeatVariable.*;
 
+
 @Service
 public class UserClauseGeneratorSimple implements UserClauseGenerator {
+
+  //TODO: actually fill the clauses
 
   public List<Clause> generateClauses(SatUser user) {
     List<Clause> result = new ArrayList<>();
