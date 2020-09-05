@@ -50,7 +50,7 @@ public class CommonDiscomfortRatiosService {
                           .isAdult(true)
                           .isOftenFlying(true)
                           .travelsAlone(true)
-                          .ordersFoodOften(true)
+                          .isOrdersFoodOften(true)
                           .build());
     mockCommonUsers.add(SatUser.builder()
                           .isAdult(true)

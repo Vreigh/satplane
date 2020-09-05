@@ -17,6 +17,6 @@ public class SatUser {
   private boolean isOftenFlying;
   private boolean isAfraidToFly;
   private boolean travelsAlone;
-  private boolean ordersFoodOften;
+  private boolean isOrdersFoodOften;
 
 }
