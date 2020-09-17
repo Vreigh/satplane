@@ -3,18 +3,18 @@ package com.sp.satplane.sat.service.clausegenerator;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.sp.satplane.sat.model.Clause;
 import com.sp.satplane.sat.model.SatUser;
 
 import static com.sp.satplane.sat.model.SatSeatVariable.*;
-
+import static com.sp.satplane.sat.service.clausegenerator.ClauseGeneratorType.SIMPLE;
 
 @Service
+@ForClauseGeneratorType(clauseGeneratorType = SIMPLE)
 public class UserClauseGeneratorSimple implements UserClauseGenerator {
-
-  //TODO: actually fill the clauses
 
   public List<Clause> generateClauses(SatUser user) {
     List<Clause> result = new ArrayList<>();

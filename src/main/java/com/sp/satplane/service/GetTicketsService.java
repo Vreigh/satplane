@@ -1,11 +1,12 @@
 package com.sp.satplane.service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import com.sp.satplane.mapper.SeatMapper;
@@ -16,6 +17,8 @@ import com.sp.satplane.model.User;
 import com.sp.satplane.sat.model.Clause;
 import com.sp.satplane.sat.model.SatSeat;
 import com.sp.satplane.sat.model.SatUser;
+import com.sp.satplane.sat.service.clausegenerator.ClauseGeneratorType;
+import com.sp.satplane.sat.service.clausegenerator.ForClauseGeneratorType;
 import com.sp.satplane.sat.service.clausegenerator.UserClauseGenerator;
 
 import lombok.Getter;
@@ -34,13 +37,15 @@ public class GetTicketsService {
 
   private static final int MIN_SEATS_TO_PRESENT = 5;
 
+  private final ApplicationContext ctx;
+  private Map<ClauseGeneratorType, UserClauseGenerator> clauseGeneratorsMap;
+
   private final UserService userService;
   private final SeatService seatService;
-  private final UserClauseGenerator userClauseGenerator;
   private final DiscomfortCalculator discomfortCalculator;
   private final CommonDiscomfortRatiosService commonDiscomfortRatiosService;
 
-  public List<Ticket> getTickets(Long userId, Long planeId) {
+  public List<Ticket> getTickets(Long userId, Long planeId, ClauseGeneratorType clauseGeneratorType) {
     User user = userService.getUser(userId);
     List<Seat> seats = seatService.getSeatsOfPlane(planeId);
     BigDecimal ticketBasePrice = seatService.getPlaneBaseTicketPrice(planeId);
@@ -51,7 +56,7 @@ public class GetTicketsService {
     SatUser satUser = UserMapper.INSTANCE.map(user);
     List<SatSeat> satSeats = SeatMapper.INSTANCE.map(seats);
 
-    List<Clause> userClauses = userClauseGenerator.generateClauses(satUser);
+    List<Clause> userClauses = clauseGeneratorsMap.get(clauseGeneratorType).generateClauses(satUser);
 
     int idealDiscomfort = discomfortCalculator.calculateIdealDiscomfort(userClauses);
 
@@ -109,6 +114,22 @@ public class GetTicketsService {
         return new Ticket(seat.id, basePrice.multiply(finalPercentage).setScale(2, BigDecimal.ROUND_CEILING));
       }).collect(Collectors.toList());
 
+  }
+
+  @PostConstruct
+  public void init() {
+    clauseGeneratorsMap = new EnumMap<>(ClauseGeneratorType.class);
+
+    Map<String, Object> beans = ctx.getBeansWithAnnotation(ForClauseGeneratorType.class);
+    beans.forEach((beanName, bean) -> {
+      ForClauseGeneratorType forCostCalculationType = ctx.findAnnotationOnBean(beanName, ForClauseGeneratorType.class);
+      assert forCostCalculationType != null;
+      if (bean instanceof UserClauseGenerator) {
+        clauseGeneratorsMap.put(forCostCalculationType.clauseGeneratorType(), (UserClauseGenerator) bean);
+      } else {
+        throw new IllegalStateException("Setup error");
+      }
+    });
   }
 
   @Getter

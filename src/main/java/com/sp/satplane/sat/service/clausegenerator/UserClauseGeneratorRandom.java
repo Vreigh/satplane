@@ -14,6 +14,7 @@ import static com.sp.satplane.sat.model.SatSeatVariable.TOTAL_VARS;
 import static java.lang.Math.abs;
 
 @Service
+@ForClauseGeneratorType(clauseGeneratorType = ClauseGeneratorType.RANDOM)
 @Primary
 public class UserClauseGeneratorRandom implements UserClauseGenerator {
 
