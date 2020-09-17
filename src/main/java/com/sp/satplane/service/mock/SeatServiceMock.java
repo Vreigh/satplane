@@ -24,6 +24,9 @@ public class SeatServiceMock implements SeatService {
     if (planeId.equals(0L)) {
       fillPredefined(mockSeats, planeId);
     } else {
+      if(planeId > 500L) {
+        planeId = 500L;
+      }
       Random r = new Random();
       for (int i = 0; i < planeId; i++) {
         Seat mockSeat = new Seat();
