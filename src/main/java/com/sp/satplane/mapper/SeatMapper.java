@@ -19,17 +19,17 @@ public abstract class SeatMapper {
 
   public SatSeat mapSeat(Seat seat) {
     List<SatSeatVariable> variables = new ArrayList<>();
-    addIfTrue(variables, SatSeatVariable.BY_WINDOW, seat.getByWindow());
-    addIfTrue(variables, SatSeatVariable.BY_EMERGENCY_EXIT, seat.getByEmergencyExit());
-    addIfTrue(variables, SatSeatVariable.BY_WING, seat.getByWing());
-    addIfTrue(variables, SatSeatVariable.MORE_LEG_SPACE, seat.getMoreLegSpace());
-    addIfTrue(variables, SatSeatVariable.NEAR_SEAT_TAKEN, seat.getNearSeatTaken());
-    addIfTrue(variables, SatSeatVariable.BY_TOILET, seat.getByToilet());
-    addIfTrue(variables, SatSeatVariable.BY_KITCHEN, seat.getByKitchen());
-    addIfTrue(variables, SatSeatVariable.IS_LOUD, seat.getIsLoud());
-    addIfTrue(variables, SatSeatVariable.WITH_TURBULENCE, seat.getWithTurbulence());
-    addIfTrue(variables, SatSeatVariable.BY_AISLE, seat.getByAisle());
-    addIfTrue(variables, SatSeatVariable.IS_SAFEST, seat.getIsSafest());
+    addIfTrue(variables, SatSeatVariable.BY_WINDOW, seat.isByWindow());
+    addIfTrue(variables, SatSeatVariable.BY_EMERGENCY_EXIT, seat.isByEmergencyExit());
+    addIfTrue(variables, SatSeatVariable.BY_WING, seat.isByWing());
+    addIfTrue(variables, SatSeatVariable.MORE_LEG_SPACE, seat.isMoreLegSpace());
+    addIfTrue(variables, SatSeatVariable.NEAR_SEAT_TAKEN, seat.isNearSeatTaken());
+    addIfTrue(variables, SatSeatVariable.BY_TOILET, seat.isByToilet());
+    addIfTrue(variables, SatSeatVariable.BY_KITCHEN, seat.isByKitchen());
+    addIfTrue(variables, SatSeatVariable.IS_LOUD, seat.isLoud());
+    addIfTrue(variables, SatSeatVariable.WITH_TURBULENCE, seat.isWithTurbulence());
+    addIfTrue(variables, SatSeatVariable.BY_AISLE, seat.isByAisle());
+    addIfTrue(variables, SatSeatVariable.IS_SAFEST, seat.isSafest());
     return new SatSeat(variables); // not most efficient but more readable
   }
 

@@ -23,6 +23,9 @@ public abstract class UserMapper {
     satUser.setAfraidToFly(user.isAfraidToFly());
     satUser.setTravelsAlone(user.isTravelsAlone());
     satUser.setOrdersFoodOften(user.isOrdersFoodOften());
+    satUser.setWealthy(user.isWealthy());
+    satUser.setPoor(user.isPoor());
+    satUser.setHasTroubleMoving(user.isHasTroubleMoving());
     return satUser;
   }
 }

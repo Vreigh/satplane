@@ -26,6 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import static java.lang.Math.min;
 import static java.util.Collections.emptyList;
 import static java.util.Objects.isNull;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
@@ -83,7 +84,7 @@ public class GetTicketsService {
 
   private List<SeatSummary> filterAndSortSeatsToPresent(List<SeatSummary> seats) {
     List<SeatSummary> finalList = new ArrayList<>();
-    int minSeatsToPresent = max(seats.size() / 2, MIN_SEATS_TO_PRESENT);
+    int minSeatsToPresent = max(seats.size() / 3, MIN_SEATS_TO_PRESENT);
     seats.stream()
       .sorted(Comparator.comparing(SeatSummary::getFitRatio).reversed())
       .forEach(seat -> {
@@ -150,7 +151,7 @@ public class GetTicketsService {
     }
 
     void calculateIncentive() {
-      this.incentive = max(discomfortRatio * commonDiscomfortRatio, commonDiscomfortRatio * commonDiscomfortRatio);
+      this.incentive = min(discomfortRatio * commonDiscomfortRatio, commonDiscomfortRatio * commonDiscomfortRatio);
     }
   }
 

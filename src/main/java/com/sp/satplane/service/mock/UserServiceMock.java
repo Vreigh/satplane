@@ -27,10 +27,27 @@ public class UserServiceMock implements UserService {
         .isAfraidToFly(false)
         .travelsAlone(true)
         .ordersFoodOften(true)
+        .isWealthy(false)
+        .hasTroubleMoving(true)
+        .build();
+    }
+    if (userId == 2) {
+      return User.builder()
+        .id(2L)
+        .sex(Sex.FEMALE)
+        .age(22)
+        .hasMotionSickness(true)
+        .isFlyingAbroad(false)
+        .isOftenFlying(true)
+        .isAfraidToFly(false)
+        .travelsAlone(true)
+        .ordersFoodOften(true)
+        .isWealthy(true)
+        .hasTroubleMoving(false)
         .build();
     } else {
       return User.builder()
-        .id(2L)
+        .id(3L)
         .sex(Sex.FEMALE)
         .age(55)
         .hasMotionSickness(true)
@@ -39,6 +56,8 @@ public class UserServiceMock implements UserService {
         .isAfraidToFly(true)
         .travelsAlone(false)
         .ordersFoodOften(false)
+        .isPoor(true)
+        .hasTroubleMoving(true)
         .build();
     }
   }

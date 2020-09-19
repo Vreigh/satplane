@@ -14,15 +14,15 @@ public class Seat {
   private Long id;
   private Long planeId;
 
-  private Boolean byWindow;
-  private Boolean byEmergencyExit;
-  private Boolean byWing;
-  private Boolean moreLegSpace;
-  private Boolean nearSeatTaken;
-  private Boolean byToilet;
-  private Boolean byKitchen;
-  private Boolean isLoud;
-  private Boolean withTurbulence;
-  private Boolean byAisle;
-  private Boolean isSafest;
+  private boolean byWindow;
+  private boolean byEmergencyExit;
+  private boolean byWing;
+  private boolean moreLegSpace;
+  private boolean nearSeatTaken;
+  private boolean byToilet;
+  private boolean byKitchen;
+  private boolean isLoud;
+  private boolean withTurbulence;
+  private boolean byAisle;
+  private boolean isSafest;
 }

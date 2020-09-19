@@ -19,5 +19,8 @@ public class User {
   private boolean isAfraidToFly;
   private boolean travelsAlone;
   private boolean ordersFoodOften;
+  private boolean isWealthy;
+  private boolean isPoor;
+  private boolean hasTroubleMoving;
 
 }

@@ -1,9 +1,7 @@
 package com.sp.satplane.service.mock;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import org.springframework.stereotype.Service;
 
@@ -13,10 +11,21 @@ import com.sp.satplane.service.SeatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import static java.util.Arrays.asList;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class SeatServiceMock implements SeatService {
+
+  private Set<Integer> byWindowSet = new HashSet<>(asList(1, 6, 7, 12, 13, 18));
+  private Set<Integer> byAisleSet = new HashSet<>(asList(3, 4, 9, 10, 15, 16));
+  private Set<Integer> byToiletSet = new HashSet<>(asList(4, 5, 6, 10, 11));
+  private Set<Integer> byKitchenSet = new HashSet<>(asList(1, 2, 3, 8, 9));
+  private Set<Integer> byEmergencyExitSet = new HashSet<>(asList(7, 8, 9, 13, 14, 15));
+  private Set<Integer> isTakenSet = new HashSet<>(asList(8, 17, 4));
+  private Set<Integer> isLoudSet = new HashSet<>(asList(5, 10, 15));
+  private Set<Integer> isSafestSet = new HashSet<>(asList(7, 14, 18));
 
   public List<Seat> getSeatsOfPlane(Long planeId) {
     List<Seat> mockSeats = new ArrayList<>();
@@ -24,8 +33,8 @@ public class SeatServiceMock implements SeatService {
     if (planeId.equals(0L)) {
       fillPredefined(mockSeats, planeId);
     } else {
-      if(planeId > 500L) {
-        planeId = 500L;
+      if (planeId > 5000L) {
+        planeId = 5000L;
       }
       Random r = new Random();
       for (int i = 0; i < planeId; i++) {
@@ -39,10 +48,10 @@ public class SeatServiceMock implements SeatService {
         mockSeat.setNearSeatTaken(r.nextBoolean());
         mockSeat.setByToilet(r.nextBoolean());
         mockSeat.setByKitchen(r.nextBoolean());
-        mockSeat.setIsLoud(r.nextBoolean());
+        mockSeat.setLoud(r.nextBoolean());
         mockSeat.setWithTurbulence(r.nextBoolean());
         mockSeat.setByAisle(r.nextBoolean());
-        mockSeat.setIsSafest(r.nextBoolean());
+        mockSeat.setSafest(r.nextBoolean());
         mockSeats.add(mockSeat);
       }
     }
@@ -51,53 +60,46 @@ public class SeatServiceMock implements SeatService {
   }
 
   private void fillPredefined(List<Seat> mockSeats, Long planeId) {
-    Seat mockSeat1 = new Seat();
-    mockSeat1.setId(1L);
-    mockSeat1.setPlaneId(planeId);
-    mockSeat1.setByWindow(true);
-    mockSeat1.setByEmergencyExit(false);
-    mockSeat1.setByWing(true);
-    mockSeat1.setMoreLegSpace(false);
-    mockSeat1.setNearSeatTaken(false);
-    mockSeat1.setByToilet(false);
-    mockSeat1.setByKitchen(true);
-    mockSeat1.setIsLoud(false);
-    mockSeat1.setWithTurbulence(true);
-    mockSeat1.setByAisle(true);
-    mockSeat1.setIsSafest(false);
-    mockSeats.add(mockSeat1);
-
-    Seat mockSeat2 = new Seat();
-    mockSeat2.setId(2L);
-    mockSeat2.setPlaneId(planeId);
-    mockSeat2.setByWindow(false);
-    mockSeat2.setByEmergencyExit(false);
-    mockSeat2.setByWing(false);
-    mockSeat2.setMoreLegSpace(true);
-    mockSeat2.setNearSeatTaken(true);
-    mockSeat2.setByToilet(false);
-    mockSeat2.setByKitchen(true);
-    mockSeat2.setIsLoud(true);
-    mockSeat2.setWithTurbulence(false);
-    mockSeat2.setByAisle(false);
-    mockSeat2.setIsSafest(false);
-    mockSeats.add(mockSeat2);
-
-    Seat mockSeat3 = new Seat();
-    mockSeat3.setId(3L);
-    mockSeat3.setPlaneId(planeId);
-    mockSeat3.setByWindow(false);
-    mockSeat3.setByEmergencyExit(true);
-    mockSeat3.setByWing(true);
-    mockSeat3.setMoreLegSpace(false);
-    mockSeat3.setNearSeatTaken(false);
-    mockSeat3.setByToilet(true);
-    mockSeat3.setByKitchen(true);
-    mockSeat3.setIsLoud(true);
-    mockSeat3.setWithTurbulence(false);
-    mockSeat3.setByAisle(true);
-    mockSeat3.setIsSafest(true);
-    mockSeats.add(mockSeat3);
+    for (int i = 1; i < 19; i++) {
+      Long id = (long) i;
+      Seat mockSeat = new Seat();
+      mockSeat.setPlaneId(planeId);
+      mockSeat.setId(id);
+      if (byWindowSet.contains(i)) {
+        mockSeat.setByWindow(true);
+      }
+      if (byEmergencyExitSet.contains(i)) {
+        mockSeat.setByEmergencyExit(true);
+      }
+      if (i > 6 && i < 13) {
+        mockSeat.setByWing(true);
+      }
+      if (i % 4 == 0) {
+        mockSeat.setMoreLegSpace(true);
+      }
+      if (isTakenSet.contains(i)) {
+        mockSeat.setNearSeatTaken(true);
+      }
+      if (byToiletSet.contains(i)) {
+        mockSeat.setByToilet(true);
+      }
+      if (byKitchenSet.contains(i)) {
+        mockSeat.setByKitchen(true);
+      }
+      if (isLoudSet.contains(i)) {
+        mockSeat.setLoud(true);
+      }
+      if (i > 12) {
+        mockSeat.setWithTurbulence(true);
+      }
+      if (byAisleSet.contains(i)) {
+        mockSeat.setByAisle(true);
+      }
+      if (isSafestSet.contains(i)) {
+        mockSeat.setSafest(true);
+      }
+      mockSeats.add(mockSeat);
+    }
   }
 
   @Override
