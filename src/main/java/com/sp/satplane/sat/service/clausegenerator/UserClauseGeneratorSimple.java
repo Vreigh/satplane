@@ -98,14 +98,14 @@ public class UserClauseGeneratorSimple implements UserClauseGenerator {
     }
 
     if (user.isPoor()) {
-      result.add(new Clause(40, new int[] { IS_LOUD.yes(), WITH_TURBULENCE.yes() }));
-      result.add(new Clause(50, new int[] { BY_WINDOW.no(), BY_AISLE.no() }));
-      result.add(new Clause(45, new int[] { IS_SAFEST.no(), BY_EMERGENCY_EXIT.no() }));
+      result.add(new Clause(55, new int[] { IS_LOUD.yes(), WITH_TURBULENCE.yes() }));
+      result.add(new Clause(75, new int[] { BY_WINDOW.no(), BY_AISLE.no() }));
+      result.add(new Clause(65, new int[] { IS_SAFEST.no(), BY_EMERGENCY_EXIT.no() }));
     }
 
     if (user.isOld() && !user.isActive()) {
       result.add(new Clause(100, new int[] { BY_AISLE.yes() }));
-      result.add(new Clause(50, new int[] { NEAR_SEAT_TAKEN.no(), BY_TOILET.no() }));
+      result.add(new Clause(80, new int[] { NEAR_SEAT_TAKEN.no(), BY_TOILET.no() }));
     }
 
     return result;

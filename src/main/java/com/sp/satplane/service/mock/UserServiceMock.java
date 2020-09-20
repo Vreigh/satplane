@@ -49,7 +49,7 @@ public class UserServiceMock implements UserService {
       return User.builder()
         .id(3L)
         .sex(Sex.FEMALE)
-        .age(55)
+        .age(68)
         .hasMotionSickness(true)
         .isFlyingAbroad(true)
         .isOftenFlying(false)
