@@ -25,7 +25,7 @@ public abstract class UserMapper {
     satUser.setOrdersFoodOften(user.isOrdersFoodOften());
     satUser.setWealthy(user.isWealthy());
     satUser.setPoor(user.isPoor());
-    satUser.setHasTroubleMoving(user.isHasTroubleMoving());
+    satUser.setActive(user.isActive());
     return satUser;
   }
 }

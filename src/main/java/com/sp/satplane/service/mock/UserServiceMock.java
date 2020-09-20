@@ -28,7 +28,7 @@ public class UserServiceMock implements UserService {
         .travelsAlone(true)
         .ordersFoodOften(true)
         .isWealthy(false)
-        .hasTroubleMoving(true)
+        .isActive(false)
         .build();
     }
     if (userId == 2) {
@@ -43,7 +43,7 @@ public class UserServiceMock implements UserService {
         .travelsAlone(true)
         .ordersFoodOften(true)
         .isWealthy(true)
-        .hasTroubleMoving(false)
+        .isActive(true)
         .build();
     } else {
       return User.builder()
@@ -57,7 +57,7 @@ public class UserServiceMock implements UserService {
         .travelsAlone(false)
         .ordersFoodOften(false)
         .isPoor(true)
-        .hasTroubleMoving(true)
+        .isActive(false)
         .build();
     }
   }

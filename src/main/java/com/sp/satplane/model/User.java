@@ -21,6 +21,6 @@ public class User {
   private boolean ordersFoodOften;
   private boolean isWealthy;
   private boolean isPoor;
-  private boolean hasTroubleMoving;
+  private boolean isActive;
 
 }

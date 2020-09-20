@@ -20,6 +20,6 @@ public class SatUser {
   private boolean isOrdersFoodOften;
   private boolean isWealthy;
   private boolean isPoor;
-  private boolean hasTroubleMoving;
+  private boolean isActive;
 
 }
